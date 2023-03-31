@@ -17,7 +17,17 @@
 ## Running the program in a Docker container
 - The program will output files into a folder named `output`. If the folder doesn't exist yet, create it  
 - Write one of the following from the base folder to run the program:
+
 ```bash
-> docker compose up --build
-> docker-compose up --build
+# Using Docker Compose:
+> 	docker compose up --build
+> 	docker-compose up --build
+
+# Using just the Docker CLI
+> 	docker build -t math_prediction .
+	docker run \
+	--name math_prediction \
+	-v "$(pwd)"/src:/app/src:ro \
+	-v "$(pwd)"/input:/app/input:ro \
+	-v "$(pwd)"/output:/app/output math_prediction
 ```

@@ -10,7 +10,7 @@
 ## Prerequisites
 - Python version: `3.7.9`
 
-## Pip packages
+**Pip packages**
 - nltk v3.8.1
 
 ## Docker

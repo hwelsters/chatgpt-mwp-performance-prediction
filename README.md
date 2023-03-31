@@ -8,10 +8,16 @@
 </p>
 
 ## Prerequisites
-- Python version: `3.7.9`
+- Docker  
+- Python `v3.7.9`
 
 **Pip packages**
-- nltk v3.8.1
+- nltk `v3.8.1`
 
-## Docker
-We use Docker to maintain a consistent run time across multiple computers
+## Running the program in a Docker container
+The program will output files into a folder named `output`. If the folder doesn't exist yet, create it  
+Write one of the following from the base folder to run the program:
+```
+> docker compose up --build
+> docker-compose up --build
+```

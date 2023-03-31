@@ -1,7 +1,0 @@
-{
-  "license": "MIT",
-  "scripts": {
-    "clean": "docker container prune & docker volume prune",
-    "uncommited": "git ls-files --modified --deleted"
-  }
-}

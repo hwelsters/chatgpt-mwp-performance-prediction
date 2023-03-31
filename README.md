@@ -15,7 +15,7 @@
 - nltk `v3.8.1`
 
 ## Running the program in a Docker container
-- The program will output files into a folder named `output`. If the folder doesn't exist yet, create it  
+- The program will output files into a folder with the following file path: `$(base_directory)/output`. If the folder doesn't exist yet, create it  
 - Write one of the following from the base folder to run the program:
 
 ```bash

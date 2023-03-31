@@ -15,13 +15,14 @@
 - nltk `v3.8.1`
 
 ## Running the program in a Docker container
+- We use Docker to produce results that can easily be reproducible on any computer
 - The program will output files into a folder with the following file path: `$(base_directory)/output`. If the folder doesn't exist yet, create it  
 - Write one of the following from the base folder to run the program:
 
 ```bash
 # Using Docker Compose:
-> docker compose up --build
-> docker-compose up --build
+> docker compose up
+> docker-compose up
 
 # Using just the Docker CLI
 > docker build -t math_prediction .

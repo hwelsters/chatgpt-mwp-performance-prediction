@@ -20,14 +20,14 @@
 
 ```bash
 # Using Docker Compose:
-> 	docker compose up --build
-> 	docker-compose up --build
+> docker compose up --build
+> docker-compose up --build
 
 # Using just the Docker CLI
-> 	docker build -t math_prediction .
-	docker run \
-	--name math_prediction \
-	-v "$(pwd)"/src:/app/src:ro \
-	-v "$(pwd)"/input:/app/input:ro \
-	-v "$(pwd)"/output:/app/output math_prediction
+> docker build -t math_prediction .
+  docker run \
+  --name math_prediction \
+  -v "$(pwd)"/src:/app/src:ro \
+  -v "$(pwd)"/input:/app/input:ro \
+  -v "$(pwd)"/output:/app/output math_prediction
 ```

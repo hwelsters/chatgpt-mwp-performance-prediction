@@ -205,30 +205,30 @@ class XlsxWriter:
         make_scattersheet(UNKNOWNS_TITLE, 'Number of Unknowns', 'num_of_unknowns')
         make_scattersheet(PAIRS_OF_PARENS_TITLE, 'Pairs of Parentheses', 'pairs_of_parentheses')
 
-        graded_worksheet = workbook.add_worksheet(LABELLED_RESPONSES_TITLE)
-        graded_worksheet.set_column(0, 6, 80)
-        graded_worksheet.write(0, 0, 'Date Time', border_format)
-        graded_worksheet.write(0, 1, 'Questions', border_format)
-        graded_worksheet.write(0, 2, 'ChatGPT\'s Response', border_format)
-        graded_worksheet.write(0, 3, 'Correct solutions', border_format)
-        graded_worksheet.write(0, 4, 'Extracted solutions', border_format)
-        graded_worksheet.write(0, 5, 'Extracted unknowns', border_format)
-        graded_worksheet.write(0, 6, 'Extracted equations', border_format)
-        graded_worksheet.write(0, 7, 'Normal correct', border_format)
-        graded_worksheet.write(0, 8, 'Normal rounded', border_format)
+        # graded_worksheet = workbook.add_worksheet(LABELLED_RESPONSES_TITLE)
+        # graded_worksheet.set_column(0, 6, 80)
+        # graded_worksheet.write(0, 0, 'Date Time', border_format)
+        # graded_worksheet.write(0, 1, 'Questions', border_format)
+        # graded_worksheet.write(0, 2, 'ChatGPT\'s Response', border_format)
+        # graded_worksheet.write(0, 3, 'Correct solutions', border_format)
+        # graded_worksheet.write(0, 4, 'Extracted solutions', border_format)
+        # graded_worksheet.write(0, 5, 'Extracted unknowns', border_format)
+        # graded_worksheet.write(0, 6, 'Extracted equations', border_format)
+        # graded_worksheet.write(0, 7, 'Normal correct', border_format)
+        # graded_worksheet.write(0, 8, 'Normal rounded', border_format)
 
-        index = 2
-        for idx, row in input_df.iterrows():
-            graded_worksheet.write(index, 0, str(row['date_time']), border_format)
-            graded_worksheet.write(index, 1, str(row['question']), border_format)
-            graded_worksheet.write(index, 2, str(row['response']), border_format)
-            graded_worksheet.write(index, 3, str(row['lSolutions']), border_format)
-            graded_worksheet.write(index, 4, str(row['extracted_solution']), border_format)
-            graded_worksheet.write(index, 5, str(row['unknowns']), border_format)
-            graded_worksheet.write(index, 6, str(row['equations']), border_format)
-            graded_worksheet.write(index, 7, str(row['normal']), border_format)
-            graded_worksheet.write(index, 8, str(row['rounded']), border_format)
-            index += 1
+        # index = 2
+        # for idx, row in input_df.iterrows():
+        #     if "date_time" in row.keys(): graded_worksheet.write(index, 0, str(row['date_time']), border_format)
+        #     graded_worksheet.write(index, 1, str(row['question']), border_format)
+        #     graded_worksheet.write(index, 2, str(row['response']), border_format)
+        #     graded_worksheet.write(index, 3, str(row['lSolutions']), border_format)
+        #     graded_worksheet.write(index, 4, str(row['extracted_solution']), border_format)
+        #     graded_worksheet.write(index, 5, str(row['unknowns']), border_format)
+        #     graded_worksheet.write(index, 6, str(row['equations']), border_format)
+        #     graded_worksheet.write(index, 7, str(row['normal']), border_format)
+        #     graded_worksheet.write(index, 8, str(row['rounded']), border_format)
+        #     index += 1
 
         # Model values
         model_worksheet = workbook.add_worksheet(MODEL_PERFORMANCE_TITLE)

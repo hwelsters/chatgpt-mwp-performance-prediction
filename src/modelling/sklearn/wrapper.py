@@ -12,7 +12,6 @@ class SklearnHelper(object):
         return self.fitted.predict(x)
     
     def tune(self, x_train, y_train, params=None):
-        print("TUNING...")
         
         grid = GridSearchCV(self.clf(), param_grid=params)
         grid.fit(x_train, y_train)

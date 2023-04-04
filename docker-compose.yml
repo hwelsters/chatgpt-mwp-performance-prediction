@@ -7,5 +7,5 @@ services:
       dockerfile: Dockerfile
     volumes:
       - ./src:/app/src:ro
-      - ./input:/app/input:ro
+      - ./data:/app/data:ro
       - ./output:/app/output

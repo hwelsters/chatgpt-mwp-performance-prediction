@@ -13,7 +13,7 @@ class Grader:
         answers = [process_func(x) for x in answers]
         answers = set(answers)
 
-        if decimals.issubset(answers): return "all"
+        if answers.issubset(decimals): return "all"
         if len(decimals.intersection(answers)) > 0: return "some"
         return "none"
 

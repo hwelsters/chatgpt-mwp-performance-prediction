@@ -48,3 +48,7 @@ class MathFeatureExtraction:
     @staticmethod
     def count_number_of_multiplications(equations: list):
         return MathFeatureExtraction.count_number_of_feature(equations, '×') + MathFeatureExtraction.count_number_of_feature(equations, '*')
+    
+    @staticmethod
+    def count_number_of_parentheses(equations: list):
+        return MathFeatureExtraction.count_number_of_feature(equations, '(')

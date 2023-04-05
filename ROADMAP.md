@@ -11,5 +11,3 @@ TODO:
 - [🦜] Tagging parts of response
 - [🦜] NLP response tagging to improve prediction
 - [🦜] Asking ChatGPT to correct itself and then further gauging its performance.
-
-IDEA: We can beat state-of-the-art for ChatGPT

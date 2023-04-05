@@ -7,7 +7,6 @@ TODO:
 - [🦜] Ask ChatGPT to tag parts of response (Abhinav)
 - [🦆] HTML Tag extraction from ChatGPT     (Noel)
 - [🦜] Limit equations on prompt            (Abhinav)
-- [🦜] Clarifying answers                   
 - [🦜] Tagging parts of response
-- [🦜] NLP response tagging to improve prediction
+- [🦜] NLP response tagging to improve prediction (Lakshmivihari)
 - [🦜] Asking ChatGPT to correct itself and then further gauging its performance.

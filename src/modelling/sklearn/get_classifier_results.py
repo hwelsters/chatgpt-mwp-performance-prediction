@@ -66,7 +66,9 @@ def get_classifier_results(x_data: pandas.DataFrame, y_data: pandas.Series, n_sp
             'max_depth': [6, 10, 50],
             'min_samples_leaf': [2, 5, 10],
             'max_features': ['sqrt', 'log2', None],
-            'class_weight': ['balanced_subsample', 'balanced']
+            'class_weight': ['balanced_subsample', 'balanced'],
+            'threshold': [0.4]
+
             # 'n_jobs': [-1],
             # 'n_estimators': [500],
             # 'warm_start': [True],
@@ -74,7 +76,8 @@ def get_classifier_results(x_data: pandas.DataFrame, y_data: pandas.Series, n_sp
             # 'min_samples_leaf': [2],
             # 'max_features': ['sqrt'],
             # 'verbose': [0], 
-            # 'class_weight': ['balanced_subsample']
+            # 'class_weight': ['balanced_subsample'],
+            # 'threshold': [0.4]
         }
     )
     gradient_boost.tune(x_data, y_data, params={
@@ -84,10 +87,12 @@ def get_classifier_results(x_data: pandas.DataFrame, y_data: pandas.Series, n_sp
             'min_samples_leaf': [2, 5, 10],
             'max_features': ['sqrt'],
             'subsample': [1, 10]
+
             # 'n_estimators': [500],
             # 'max_depth': [5],
             # 'min_samples_leaf': [2],
-            # 'verbose': [0]
+            # 'verbose': [0],
+            # 'threshold': [0.4]
         }
     )
     xg_boost.tune(x_data, y_data, params={
@@ -96,10 +101,12 @@ def get_classifier_results(x_data: pandas.DataFrame, y_data: pandas.Series, n_sp
             'max_depth': [3, 10, 50],
             'learning_rate': [0.01, 0.1, 0.3],
             'scale_pos_weight': [(y_data ^ 1).sum() / y_data.sum()]
+
             # 'n_jobs': [-1],
             # 'n_estimators': [500],
             # 'max_depth': [2],
-            # 'scale_pos_weight': [(1 - y_data).sum() / y_data.sum()]
+            # 'scale_pos_weight': [(1 - y_data).sum() / y_data.sum()],
+            # 'threshold': [0.4]
         }
     )
     extra_trees.tune(x_data, y_data, params={
@@ -107,19 +114,21 @@ def get_classifier_results(x_data: pandas.DataFrame, y_data: pandas.Series, n_sp
             'min_samples_leaf': [2, 5, 10],
             'max_features': ['sqrt', 'log2'],
             'class_weight': ['balanced_subsample', 'balanced']
+
             # 'n_jobs': [-1],
             # 'n_estimators': [500],
             # 'max_depth': [8],
             # 'min_samples_leaf': [2]
             # 'verbose': [0]
-            # ,'class_weight': ['balanced']
+            # ,'class_weight': ['balanced'],
+            # 'threshold': [0.4]
         }
     )
     decision_tree.tune(x_data, y_data, params={
         'criterion': ['gini', 'entropy', 'log_loss'],
         'splitter': ['best', 'random'],
         'max_depth': [3, 10, 50],
-        'max_leaf_nodes': [1, 10, 50, None] 
+        'max_leaf_nodes': [1, 10, 50, None]
         }
     )
 

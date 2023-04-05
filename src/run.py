@@ -1,5 +1,7 @@
 import pandas
-import nltk
+import os
+import shutil
+import datetime
 
 from feature_engineering.equation_extraction import EquationExtraction
 from feature_engineering.math_feature_extraction import MathFeatureExtraction
@@ -7,6 +9,8 @@ from feature_engineering.generate_geq import GenerateGeq
 
 from answer_checking.grader import Grader
 from causality_analysis.calculate_causality import Causality
+
+from modelling.sklearn.get_classifier_results import get_classifier_results
 
 from xlsx_creation.xlsx_writer import XlsxWriter
 
@@ -21,6 +25,7 @@ RESPONSE_COLUMN = "response"
 EQUATIONS_COLUMN = "equations"
 ROUNDED_COLUMN = "rounded"
 NORMAL_COLUMN = "normal"
+EXTRACTED_SOLUTIONS_COLUMN = "extracted_solution"
 
 EFFECT_COLUMN = 'correct'
 VALID_COLUMN = 'valid'
@@ -53,9 +58,11 @@ def run(input_file_path : str, question_file_path : str, output_file_path : str,
     # If ChatGPT's response is correct when both the answer and solution is rounded
     input_df[NORMAL_COLUMN] = input_df.apply(lambda row : Grader.check_correct(row[RESPONSE_COLUMN], question_df.loc[row[QUESTION_NUMBER_COLUMN]][LSOLUTIONS_COLUMN]), axis=1)
     input_df[ROUNDED_COLUMN] = input_df.apply(lambda row : Grader.check_rounded(row[RESPONSE_COLUMN], question_df.loc[row[QUESTION_NUMBER_COLUMN]][LSOLUTIONS_COLUMN]), axis=1)
+    input_df[LSOLUTIONS_COLUMN] = input_df.apply(lambda row : question_df.loc[row[QUESTION_NUMBER_COLUMN]][LSOLUTIONS_COLUMN], axis=1)
 
     # Extract equations from ChatGPT's solution *****************************************************
     input_df[EQUATIONS_COLUMN] = input_df.apply(lambda row : EquationExtraction.extract_equations(row[RESPONSE_COLUMN]), axis=1)
+    input_df[EXTRACTED_SOLUTIONS_COLUMN] = input_df.apply(lambda row : Grader.extract_decimals(row[RESPONSE_COLUMN]), axis=1)
 
     # Extract math features from extracted solution **************************************************
     input_df[NUM_OF_ADDITIONS_COLUMN] = input_df.apply(lambda row : MathFeatureExtraction.count_number_of_additions(row[EQUATIONS_COLUMN]), axis=1)
@@ -65,12 +72,12 @@ def run(input_file_path : str, question_file_path : str, output_file_path : str,
     input_df[NUM_OF_EQUATIONS_COLUMN] = input_df.apply(lambda row : MathFeatureExtraction.count_number_of_equations(row[EQUATIONS_COLUMN]), axis=1)
     input_df[NUM_OF_UNKNOWNS_COLUMN] = input_df.apply(lambda row : MathFeatureExtraction.count_number_of_unknowns(row[EQUATIONS_COLUMN]), axis=1)
     input_df[UNKNOWNS_COLUMN] = input_df.apply(lambda row : MathFeatureExtraction.get_unknowns(row[EQUATIONS_COLUMN]), axis=1)
+    input_df[PAIRS_OF_PARENTHESES_COLUMN] = input_df.apply(lambda row : MathFeatureExtraction.count_number_of_parentheses(row[EQUATIONS_COLUMN]), axis=1)
 
     input_df[NUM_OF_ADDITIONS_AND_SUBTRACTIONS_COLUMN] = input_df.apply(lambda row : row[NUM_OF_ADDITIONS_COLUMN] + row[NUM_OF_SUBTRACTIONS_COLUMN],axis=1)
     input_df[NUM_OF_DIVISIONS_AND_MULTIPLICATIONS_COLUMN] = input_df.apply(lambda row : row[NUM_OF_DIVISIONS_COLUMN] + row[NUM_OF_MULTIPLICATIONS_COLUMN],axis=1)
 
     input_df = input_df.drop(columns=[NUM_OF_ADDITIONS_COLUMN, NUM_OF_SUBTRACTIONS_COLUMN, NUM_OF_MULTIPLICATIONS_COLUMN, NUM_OF_DIVISIONS_COLUMN])
-
     # Effect and valid column
     input_df[EFFECT_COLUMN] = input_df.apply(lambda row : 0 if row[NORMAL_COLUMN] == 'all' else 1, axis=1)
     input_df[VALID_COLUMN] = True
@@ -102,23 +109,98 @@ def run(input_file_path : str, question_file_path : str, output_file_path : str,
     })
 
     # Generate greater than or equal columns *********************************************************
-    input_df = input_df.drop(columns=[NORMAL_COLUMN, ROUNDED_COLUMN])
     input_df = GenerateGeq.generate_geq(input_df, NUM_OF_ADDITIONS_AND_SUBTRACTIONS_COLUMN)
     input_df = GenerateGeq.generate_geq(input_df, NUM_OF_DIVISIONS_AND_MULTIPLICATIONS_COLUMN)
     input_df = GenerateGeq.generate_geq(input_df, NUM_OF_EQUATIONS_COLUMN)
     input_df = GenerateGeq.generate_geq(input_df, NUM_OF_UNKNOWNS_COLUMN)
+    input_df = GenerateGeq.generate_geq(input_df, PAIRS_OF_PARENTHESES_COLUMN)
 
-    causality_df = Causality.causality_wrapper(input_df, VALID_COLUMN=VALID_COLUMN, EFFECT_COLUMN=EFFECT_COLUMN)
+    cause_df = input_df.drop(columns=[NORMAL_COLUMN, ROUNDED_COLUMN])
+    causality_df = Causality.causality_wrapper(cause_df, VALID_COLUMN=VALID_COLUMN, EFFECT_COLUMN=EFFECT_COLUMN)
+    
+    results_df_x = input_df[[
+        NUM_OF_ADDITIONS_AND_SUBTRACTIONS_COLUMN, 
+        NUM_OF_DIVISIONS_AND_MULTIPLICATIONS_COLUMN, 
+        NUM_OF_EQUATIONS_COLUMN,
+        NUM_OF_UNKNOWNS_COLUMN,
+        PAIRS_OF_PARENTHESES_COLUMN]]
+    results_df_y = input_df[EFFECT_COLUMN]
+    results_dict = get_classifier_results(results_df_x, results_df_y, 5, 42, True)
 
     XlsxWriter.write_xlsx(
         stats_obj=chatgpt_stats,
         causality_df=causality_df, 
-        output_file_path=output_file_path, 
+        input_df=input_df,
+        output_file_path=output_file_path,
+        results_dict=results_dict,
         description=description)
+
+
+if os.path.exists("output/draw"):
+    shutil.rmtree("output/draw")
+os.makedirs("output/draw")
+
+current_date = str(datetime.date.today())
+
+run(
+    input_file_path=f"input/responses/draw/hwelsters__gpt-3.5-turbo-0301__v001 (prefix__all_working).jsonl", 
+    question_file_path="input/questions/draw.json", 
+    output_file_path="output/draw/ChatGPT API results (extracted equations, DRAW-1K, March, All Working).xlsx",
+    description='Prefixed with the following text: \'Answer the following math word problem. If there are multiple ways to work through the problem, show all possible ways.\'',
+)
+
+run(
+    input_file_path=f"input/responses/draw/hwelsters__gpt-3.5-turbo-0301__v001 (prefix__as_few_words).jsonl", 
+    question_file_path="input/questions/draw.json", 
+    output_file_path="output/draw/ChatGPT API results (extracted equations, DRAW-1K, March, As Few Words).xlsx",
+    description='Prefixed with the following text: \'Solve the following math word problem with as few words as possible. \'',
+)
+
+run(
+    input_file_path=f"input/responses/draw/hwelsters__gpt-3.5-turbo-0301__v001 (prefix__college students).jsonl", 
+    question_file_path="input/questions/draw.json", 
+    output_file_path="output/draw/ChatGPT API results (extracted equations, DRAW-1K, March, College Students).xlsx",
+    description='Prefixed with the following text: \'Simulate three smart college students solving math word problems: Alice, Bob and Carl. Denote each student by mentioning their name in this format Name: before their response. \'',
+)
+
+run(
+    input_file_path=f"input/responses/draw/hwelsters__gpt-3.5-turbo-0301__v001 (prefix__logic_reasoning).jsonl", 
+    question_file_path="input/questions/draw.json", 
+    output_file_path="output/draw/ChatGPT API results (extracted equations, DRAW-1K, March, Logic Reasoning).xlsx",
+    description='Prefixed with the following text: \'You are a very smart math solver. You will use logic and reasoning to solve hard problems in the simplest way. Solve the following math problem. \'',
+)
+
+run(
+    input_file_path=f"input/responses/draw/hwelsters__gpt-3.5-turbo-0301__v001 (prefix__mathematician).jsonl", 
+    question_file_path="input/questions/draw.json", 
+    output_file_path="output/draw/ChatGPT API results (extracted equations, DRAW-1K, March, Mathematician).xlsx",
+    description='Prefixed with the following text: \'You will act as a very intelligent mathematician. You will be presented with a math word problem which I would like you to solve step-by-step with clear working. Output the correct solution at the end. \'',
+)
+
+run(
+    input_file_path=f"input/responses/draw/hwelsters__gpt-3.5-turbo-0301__v001 (prefix__min_100_words).jsonl", 
+    question_file_path="input/questions/draw.json", 
+    output_file_path="output/draw/ChatGPT API results (extracted equations, DRAW-1K, March, Min 100 words).xlsx",
+    description='Prefixed with the following text: \'Solve the following math word problem with a minimum of 100 words. \'',
+)
+
+run(
+    input_file_path=f"input/responses/draw/hwelsters__gpt-3.5-turbo-0301__v001 (prefix__no-working).jsonl", 
+    question_file_path="input/questions/draw.json", 
+    output_file_path="output/draw/ChatGPT API results (extracted equations, DRAW-1K, March, No working).xlsx",
+    description='Suffixed with the following text: \'Absolutely do not do any working at all. I just want the answers instantly with nothing but the answers. \'',
+)
+
+run(
+    input_file_path=f"input/responses/draw/hwelsters__gpt-3.5-turbo-0301__v001 (prefix__step-by-step).jsonl", 
+    question_file_path="input/questions/draw.json", 
+    output_file_path="output/draw/ChatGPT API results (extracted equations, DRAW-1K, March, Step by step).xlsx",
+    description='Suffixed with the following text: \'Let\'s think things through step by step to get the right answer \'',
+)
 
 run(
     input_file_path=f"input/responses/draw/hwelsters__gpt-3.5-turbo-0301__v001.jsonl", 
     question_file_path="input/questions/draw.json", 
-    output_file_path="output/hwelsters__gpt-3.5-turbo-0301__v001.xlsx",
-    description='Suffixed questions with \'Let\'s think things through step by step to get the right answer\'',
+    output_file_path="output/draw/ChatGPT API results (extracted equations, DRAW-1K, March, No prompt engineering).xlsx",
+    description='Suffixed with the following text: \'Let\'s think things through step by step to get the right answer \'',
 )

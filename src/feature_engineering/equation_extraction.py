@@ -1,6 +1,8 @@
 import nltk
 import re
 
+from bs4 import BeautifulSoup
+
 class EquationExtraction:
     @staticmethod
     def extract_equations(text : str):
@@ -26,3 +28,10 @@ class EquationExtraction:
             if not failed: equations.append(t.strip())
             
         return equations
+
+    # @staticmethod
+    # def extract_equations(text: str):
+    #     soup = BeautifulSoup(text, "html.parser")
+    #     equations = soup.findAll("equation")
+    #     equations = [equation.text for equation in equations]
+    #     return equations

@@ -13,12 +13,12 @@ Fine-tuning a text-davinci-003 model to perform better on DRAW-1K.
 - If the results look promising, we could get a larger dataset.
 
 TODO:
-[] Ask ChatGPT to tag parts of response
-[] HTML Tag extraction from ChatGPT
-[] Limit equations on prompt
-[] Clarifying answers
-[] Tagging parts of response
-[] NLP response tagging to improve prediction
-[] Asking ChatGPT to correct itself and then further gauging its performance.
+[🦜] Ask ChatGPT to tag parts of response
+[🦆] HTML Tag extraction from ChatGPT
+[🦜] Limit equations on prompt
+[🦜] Clarifying answers
+[🦜] Tagging parts of response
+[🦜] NLP response tagging to improve prediction
+[🦜] Asking ChatGPT to correct itself and then further gauging its performance.
 
 IDEA: We can beat state-of-the-art for ChatGPT

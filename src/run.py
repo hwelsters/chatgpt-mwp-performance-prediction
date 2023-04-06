@@ -145,17 +145,85 @@ os.makedirs("output/alg514")
 
 current_date = str(datetime.date.today())
 
+# ============================================= #
+#   ALG-514
+# ============================================= #
+
+# Version 1 ----------------------------------- #
+run(
+    input_file_path=f"data/responses/alg514/hwelsters__gpt-3.5-turbo-0301__v001 (suffix__no-working).jsonl", 
+    question_file_path="data/questions/alg514.json", 
+    output_file_path="output/alg514/ChatGPT API results (extracted equations, ALG-514, March, No working, v1).xlsx",
+    description='Suffixed questions with \'Absolutely do not do any working at all. I just want the answers instantly with nothing but the answers.\'',
+)
+
+run(
+    input_file_path=f"data/responses/alg514/hwelsters__gpt-3.5-turbo-0301__v001 (suffix__step-by-step).jsonl", 
+    question_file_path="data/questions/alg514.json", 
+    output_file_path="output/alg514/ChatGPT API results (extracted equations, ALG-514, March, Step-by-step, v1).xlsx",
+    description='Suffixed with the following text: \'Let\'s think things through step by step to get the right answer \'',
+)
+
+run(
+    input_file_path=f"data/responses/alg514/hwelsters__gpt-3.5-turbo-0301__v001.jsonl", 
+    question_file_path="data/questions/alg514.json", 
+    output_file_path="output/alg514/ChatGPT API results (extracted equations, ALG-514, March, No prompt engineering, v1).xlsx",
+    description='Base results with no prompt engineering',
+)
+
+# Version 2 ----------------------------------- #
+run(
+    input_file_path=f"data/responses/alg514/hwelsters__gpt-3.5-turbo-0301__v002 (suffix__no-working).jsonl", 
+    question_file_path="data/questions/alg514.json", 
+    output_file_path="output/alg514/ChatGPT API results (extracted equations, ALG-514, March, No working, v2).xlsx",
+    description='Suffixed questions with \'Absolutely do not do any working at all. I just want the answers instantly with nothing but the answers.\'',
+)
+
+run(
+    input_file_path=f"data/responses/alg514/hwelsters__gpt-3.5-turbo-0301__v002 (suffix__step-by-step).jsonl", 
+    question_file_path="data/questions/alg514.json", 
+    output_file_path="output/alg514/ChatGPT API results (extracted equations, ALG-514, March, Step-by-step, v2).xlsx",
+    description='Suffixed with the following text: \'Let\'s think things through step by step to get the right answer \'',
+)
+
+run(
+    input_file_path=f"data/responses/alg514/hwelsters__gpt-3.5-turbo-0301__v002.jsonl", 
+    question_file_path="data/questions/alg514.json", 
+    output_file_path="output/alg514/ChatGPT API results (extracted equations, ALG-514, March, No prompt engineering, v2).xlsx",
+    description='Base results with no prompt engineering',
+)
+
+# Web version --------------------------------- #
+run(
+    input_file_path=f"data/responses/alg514/hwelsters__web__v001 (suffix__step-by-step).jsonl", 
+    question_file_path="data/questions/alg514.json", 
+    output_file_path="output/alg514/ChatGPT Web results (extracted equations, ALG-514, March, Step-by-step, v1).xlsx",
+    description='Suffixed with the following text: \'Let\'s think things through step by step to get the right answer \'',
+)
+
+run(
+    input_file_path=f"data/responses/alg514/hwelsters__web__v001.jsonl", 
+    question_file_path="data/questions/alg514.json", 
+    output_file_path="output/alg514/ChatGPT Web results (extracted equations, ALG-514, March, No prompt engineering, v1).xlsx",
+    description='Base results with no prompt engineering',
+)
+
+# ============================================= #
+#   DRAW-1K
+# ============================================= #
+
+# Abhinav's ----------------------------------- #
 run(
     input_file_path=f"data/responses/draw/abhinav_chatgpt_plus_results_feb.jsonl", 
     question_file_path="data/questions/draw.json", 
-    output_file_path="output/draw/ChatGPT Plus Web results (extracted equations, DRAW-1K, February, No working).xlsx",
+    output_file_path="output/draw/ChatGPT Plus Web results (extracted equations, DRAW-1K, February, No Prompt engineering).xlsx",
     description='No prompt engineering',
 )
 
 run(
     input_file_path=f"data/responses/draw/abhinav_chatgpt_results_feb.jsonl", 
     question_file_path="data/questions/draw.json", 
-    output_file_path="output/draw/ChatGPT Web results (extracted equations, DRAW-1K, February, No Prompt Engineering).xlsx",
+    output_file_path="output/draw/ChatGPT Web results (extracted equations, DRAW-1K, February, No working).xlsx",
     description='Instructed ChatGPT to only return numbers without working.',
 )
 
@@ -166,93 +234,160 @@ run(
     description='Instructed ChatGPT to only return numbers without working.',
 )
 
+# Version 1 ----------------------------------- #
 run(
     input_file_path=f"data/responses/draw/hwelsters__gpt-3.5-turbo-0301__v001 (prefix__all_working).jsonl", 
     question_file_path="data/questions/draw.json", 
-    output_file_path="output/draw/ChatGPT API results (extracted equations, DRAW-1K, March, All Working).xlsx",
-    description='Prefixed with the following text: \'Answer the following math word problem. If there are multiple ways to work through the problem, show all possible ways.\'',
-)
-
-run(
-    input_file_path=f"data/responses/draw/hwelsters__gpt-3.5-turbo-0301__v001 (prefix__all_working).jsonl", 
-    question_file_path="data/questions/draw.json", 
-    output_file_path="output/draw/ChatGPT API results (extracted equations, DRAW-1K, March, All Working).xlsx",
+    output_file_path="output/draw/ChatGPT API results (extracted equations, DRAW-1K, March, All Working, v1).xlsx",
     description='Prefixed with the following text: \'Answer the following math word problem. If there are multiple ways to work through the problem, show all possible ways.\'',
 )
 
 run(
     input_file_path=f"data/responses/draw/hwelsters__gpt-3.5-turbo-0301__v001 (prefix__as_few_words).jsonl", 
     question_file_path="data/questions/draw.json", 
-    output_file_path="output/draw/ChatGPT API results (extracted equations, DRAW-1K, March, As Few Words).xlsx",
+    output_file_path="output/draw/ChatGPT API results (extracted equations, DRAW-1K, March, As Few Words, v1).xlsx",
     description='Prefixed with the following text: \'Solve the following math word problem with as few words as possible. \'',
 )
 
 run(
     input_file_path=f"data/responses/draw/hwelsters__gpt-3.5-turbo-0301__v001 (prefix__college students).jsonl", 
     question_file_path="data/questions/draw.json", 
-    output_file_path="output/draw/ChatGPT API results (extracted equations, DRAW-1K, March, College Students).xlsx",
+    output_file_path="output/draw/ChatGPT API results (extracted equations, DRAW-1K, March, College Students, v1).xlsx",
     description='Prefixed with the following text: \'Simulate three smart college students solving math word problems: Alice, Bob and Carl. Denote each student by mentioning their name in this format Name: before their response. \'',
 )
 
 run(
     input_file_path=f"data/responses/draw/hwelsters__gpt-3.5-turbo-0301__v001 (prefix__logic_reasoning).jsonl", 
     question_file_path="data/questions/draw.json", 
-    output_file_path="output/draw/ChatGPT API results (extracted equations, DRAW-1K, March, Logic Reasoning).xlsx",
+    output_file_path="output/draw/ChatGPT API results (extracted equations, DRAW-1K, March, Logic Reasoning, v1).xlsx",
     description='Prefixed with the following text: \'You are a very smart math solver. You will use logic and reasoning to solve hard problems in the simplest way. Solve the following math problem. \'',
 )
 
 run(
     input_file_path=f"data/responses/draw/hwelsters__gpt-3.5-turbo-0301__v001 (prefix__mathematician).jsonl", 
     question_file_path="data/questions/draw.json", 
-    output_file_path="output/draw/ChatGPT API results (extracted equations, DRAW-1K, March, Mathematician).xlsx",
+    output_file_path="output/draw/ChatGPT API results (extracted equations, DRAW-1K, March, Mathematician, v1).xlsx",
     description='Prefixed with the following text: \'You will act as a very intelligent mathematician. You will be presented with a math word problem which I would like you to solve step-by-step with clear working. Output the correct solution at the end. \'',
 )
 
 run(
     input_file_path=f"data/responses/draw/hwelsters__gpt-3.5-turbo-0301__v001 (prefix__min_100_words).jsonl", 
     question_file_path="data/questions/draw.json", 
-    output_file_path="output/draw/ChatGPT API results (extracted equations, DRAW-1K, March, Min 100 words).xlsx",
+    output_file_path="output/draw/ChatGPT API results (extracted equations, DRAW-1K, March, Min 100 words, v1).xlsx",
     description='Prefixed with the following text: \'Solve the following math word problem with a minimum of 100 words. \'',
 )
 
 run(
     input_file_path=f"data/responses/draw/hwelsters__gpt-3.5-turbo-0301__v001 (suffix__no-working).jsonl", 
     question_file_path="data/questions/draw.json", 
-    output_file_path="output/draw/ChatGPT API results (extracted equations, DRAW-1K, March, No working).xlsx",
+    output_file_path="output/draw/ChatGPT API results (extracted equations, DRAW-1K, March, No working, v1).xlsx",
     description='Suffixed with the following text: \'Absolutely do not do any working at all. I just want the answers instantly with nothing but the answers. \'',
 )
 
 run(
     input_file_path=f"data/responses/draw/hwelsters__gpt-3.5-turbo-0301__v001 (suffix__step-by-step).jsonl", 
     question_file_path="data/questions/draw.json", 
-    output_file_path="output/draw/ChatGPT API results (extracted equations, DRAW-1K, March, Step by step).xlsx",
+    output_file_path="output/draw/ChatGPT API results (extracted equations, DRAW-1K, March, Step by step, v1).xlsx",
     description='Suffixed with the following text: \'Let\'s think things through step by step to get the right answer \'',
 )
 
 run(
     input_file_path=f"data/responses/draw/hwelsters__gpt-3.5-turbo-0301__v001.jsonl", 
     question_file_path="data/questions/draw.json", 
-    output_file_path="output/draw/ChatGPT API results (extracted equations, DRAW-1K, March, No prompt engineering).xlsx",
+    output_file_path="output/draw/ChatGPT API results (extracted equations, DRAW-1K, March, No prompt engineering, v1).xlsx",
     description='No prompt engineering',
 )
 
+# Version 2 -----------------------------------------------
+
 run(
-    input_file_path=f"data/responses/alg514/hwelsters__gpt-3.5-turbo-0301__v001 (suffix__no-working).jsonl", 
-    question_file_path="data/questions/alg514.json", 
-    output_file_path="output/alg514/ChatGPT API results (extracted equations, ALG-514, March, No working).xlsx",
-    description='No prompt engineering',
+    input_file_path=f"data/responses/draw/hwelsters__gpt-3.5-turbo-0301__v002 (suffix__no-working).jsonl", 
+    question_file_path="data/questions/draw.json", 
+    output_file_path="output/draw/ChatGPT API results (extracted equations, DRAW-1K, March, No working, v2).xlsx",
+    description='Suffixed with the following text: \'Absolutely do not do any working at all. I just want the answers instantly with nothing but the answers. \'',
 )
 
 run(
-    input_file_path=f"data/responses/alg514/hwelsters__gpt-3.5-turbo-0301__v001 (suffix__step-by-step).jsonl", 
-    question_file_path="data/questions/alg514.json", 
-    output_file_path="output/alg514/ChatGPT API results (extracted equations, ALG-514, March, Step-by-step).xlsx",
-    description='No prompt engineering',
+    input_file_path=f"data/responses/draw/hwelsters__gpt-3.5-turbo-0301__v002 (suffix__step-by-step).jsonl", 
+    question_file_path="data/questions/draw.json", 
+    output_file_path="output/draw/ChatGPT API results (extracted equations, DRAW-1K, March, Step by step, v2).xlsx",
+    description='Suffixed with the following text: \'Let\'s think things through step by step to get the right answer \'',
 )
 
 run(
-    input_file_path=f"data/responses/alg514/hwelsters__gpt-3.5-turbo-0301__v001.jsonl", 
-    question_file_path="data/questions/alg514.json", 
-    output_file_path="output/alg514/ChatGPT API results (extracted equations, ALG-514, March, No prompt engineering).xlsx",
-    description='No prompt engineering',
+    input_file_path=f"data/responses/draw/hwelsters__gpt-3.5-turbo-0301__v002.jsonl", 
+    question_file_path="data/questions/draw.json", 
+    output_file_path="output/draw/ChatGPT API results (extracted equations, DRAW-1K, March, No prompt engineering, v2).xlsx",
+    description='Base results with no prompt engineering',
+)
+
+# Version 3 -----------------------------------------------
+
+run(
+    input_file_path=f"data/responses/draw/hwelsters__gpt-3.5-turbo-0301__v003 (suffix__step-by-step).jsonl", 
+    question_file_path="data/questions/draw.json", 
+    output_file_path="output/draw/ChatGPT API results (extracted equations, DRAW-1K, March, Step by step, v3).xlsx",
+    description='Suffixed with the following text: \'Let\'s think things through step by step to get the right answer \'',
+)
+
+run(
+    input_file_path=f"data/responses/draw/hwelsters__gpt-3.5-turbo-0301__v003.jsonl", 
+    question_file_path="data/questions/draw.json", 
+    output_file_path="output/draw/ChatGPT API results (extracted equations, DRAW-1K, March, No prompt engineering, v3).xlsx",
+    description='Base results with no prompt engineering',
+)
+
+# Version 4 -----------------------------------------------
+run(
+    input_file_path=f"data/responses/draw/hwelsters__gpt-3.5-turbo-0301__v004 (suffix__step-by-step).jsonl", 
+    question_file_path="data/questions/draw.json", 
+    output_file_path="output/draw/ChatGPT API results (extracted equations, DRAW-1K, March, Step by step, v4).xlsx",
+    description='Suffixed with the following text: \'Let\'s think things through step by step to get the right answer \'',
+)
+
+run(
+    input_file_path=f"data/responses/draw/hwelsters__gpt-3.5-turbo-0301__v004.jsonl", 
+    question_file_path="data/questions/draw.json", 
+    output_file_path="output/draw/ChatGPT API results (extracted equations, DRAW-1K, March, No prompt engineering, v4).xlsx",
+    description='Base results with no prompt engineering',
+)
+
+# Version 5 -----------------------------------------------
+run(
+    input_file_path=f"data/responses/draw/hwelsters__gpt-3.5-turbo-0301__v005.jsonl", 
+    question_file_path="data/questions/draw.json", 
+    output_file_path="output/draw/ChatGPT API results (extracted equations, DRAW-1K, March, No prompt engineering, v5).xlsx",
+    description='Base results with no prompt engineering',
+)
+
+
+# Version 6 -----------------------------------------------
+run(
+    input_file_path=f"data/responses/draw/hwelsters__gpt-3.5-turbo-0301__v006.jsonl", 
+    question_file_path="data/questions/draw.json", 
+    output_file_path="output/draw/ChatGPT API results (extracted equations, DRAW-1K, March, No prompt engineering, v6).xlsx",
+    description='Base results with no prompt engineering',
+)
+
+# Version 7 -----------------------------------------------
+run(
+    input_file_path=f"data/responses/draw/hwelsters__gpt-3.5-turbo-0301__v007.jsonl", 
+    question_file_path="data/questions/draw.json", 
+    output_file_path="output/draw/ChatGPT API results (extracted equations, DRAW-1K, March, No prompt engineering, v7).xlsx",
+    description='Base results with no prompt engineering',
+)
+
+# Web version -----------------------------------------------
+run(
+    input_file_path=f"data/responses/draw/hwelsters__web__v001 (suffix__step-by-step).jsonl", 
+    question_file_path="data/questions/draw.json", 
+    output_file_path="output/draw/ChatGPT Web results (extracted equations, DRAW-1K, March, No prompt engineering, v1).xlsx",
+    description='Suffixed with the following text: \'Let\'s think things through step by step to get the right answer \'',
+)
+
+run(
+    input_file_path=f"data/responses/draw/hwelsters__web__v001.jsonl", 
+    question_file_path="data/questions/draw.json", 
+    output_file_path="output/draw/ChatGPT Web results (extracted equations, DRAW-1K, March, No prompt engineering, v1).xlsx",
+    description='Base results with no prompt engineering',
 )

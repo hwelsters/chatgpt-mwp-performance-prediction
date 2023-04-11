@@ -203,7 +203,7 @@ class XlsxWriter:
         make_scattersheet(MULTS_AND_DIVS_TITLE, 'Number of Multiplications And Divisions', 'num_of_divisions_and_multiplications')
         make_scattersheet(EQUATIONS_TITLE, 'Number of Equations', 'num_of_equations')
         make_scattersheet(UNKNOWNS_TITLE, 'Number of Unknowns', 'num_of_unknowns')
-        make_scattersheet(PAIRS_OF_PARENS_TITLE, 'Pairs of Parentheses', 'pairs_of_parentheses')
+        make_scattersheet(PAIRS_OF_PARENS_TITLE, 'Pairs of Parentheses', 'num_of_parentheses')
 
         # graded_worksheet = workbook.add_worksheet(LABELLED_RESPONSES_TITLE)
         # graded_worksheet.set_column(0, 6, 80)
@@ -248,12 +248,12 @@ class XlsxWriter:
         index = 1
         for key in results_dict.keys():
             results = results_dict[key]
-            # model_worksheet.write(index, 0, int(key), normal_format)
+            model_worksheet.write(index, 0, key, normal_format)
             model_worksheet.write(index, 2, current_date, normal_format)
-            model_worksheet.write(index, 3, results["0"]["average precision"], normal_format)
-            model_worksheet.write(index, 4, results["0"]["average recall"], normal_format)
-            model_worksheet.write(index, 5, results["1"]["average precision"], normal_format)
-            model_worksheet.write(index, 6, results["1"]["average recall"], normal_format)
+            model_worksheet.write(index, 3, results[0]["precision"], normal_format)
+            model_worksheet.write(index, 4, results[0]["recall"], normal_format)
+            model_worksheet.write(index, 5, results[1]["precision"], normal_format)
+            model_worksheet.write(index, 6, results[1]["recall"], normal_format)
 
             bar_chart.add_series({
                 'name': f'={MODEL_PERFORMANCE_TITLE}!$A${index + 1}',

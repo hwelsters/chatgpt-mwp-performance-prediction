@@ -1,7 +1,8 @@
 <h1 align="center">
 	ChatGPT MWP Performance Prediction
 </h1>
-<p align="left">
+
+<p align="center">
 	<a href="https://github.com/hwelsters/chatgpt-mwp-performance-prediction/stargazers">
 		<img alt="Stargazers" src="https://img.shields.io/github/stars/hwelsters/chatgpt-mwp-performance-prediction?style=for-the-badge"></a>
 	<a href="https://github.com/hwelsters/chatgpt-mwp-performance-prediction/issues">

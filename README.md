@@ -15,7 +15,7 @@
 
 <p align="left">
 	We study the performance of a commercially available large language model (LLM) known as ChatGPT on
-	math word problems (MWPs) from the dataset DRAW-1K. 
+	math word problems (MWPs) from the dataset DRAW-1K and ALG-514. 
 	<br/>
 	<br/>
 	We also have released the dataset of ChatGPT’s responses to the MWPs to

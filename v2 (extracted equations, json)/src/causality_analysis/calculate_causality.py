@@ -170,13 +170,13 @@ class Causality:
             # Calculates causality values
 
             # Then remove all the non binary columns
-            input_df = remove_non_binary_columns(input_df)
+            # input_df = remove_non_binary_columns(input_df)
 
             # TODO: This is a hack
-            short_names = []
-            for column in input_df.columns:
-                if len(column) < 5 and column != VALID_COLUMN and column != EFFECT_COLUMN: short_names.append(column)
-            input_df = input_df.drop(columns=short_names, axis=1)
+            # short_names = []
+            # for column in input_df.columns:
+            #     if len(column) < 5 and column != VALID_COLUMN and column != EFFECT_COLUMN: short_names.append(column)
+            # input_df = input_df.drop(columns=short_names, axis=1)
 
             # TODO: I'm not sure if there's another way to do this, so feel free to make modifications
             # Generate a dud data frame with a single so we can append to it.

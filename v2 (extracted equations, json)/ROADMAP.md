@@ -16,6 +16,9 @@ TODO:
 - [] ML models using JSON output as features. 5 cross fold. Natural split
 - [] BERT tagging
 - [] Second ML models JSON + BERT tags
+- [] Iteratively improve prompt, if it gets it wrong, ask ChatGPT for what prompt to ask it. Repeat. If it is correct, keep the prompt.
+- [] Check Sympy answer vs ChatGPT answer
+- [] 
 
 INTERESTING THINGS:
 - [] Now that we're using JSON instead, we can also... check the accuracy of the equations!

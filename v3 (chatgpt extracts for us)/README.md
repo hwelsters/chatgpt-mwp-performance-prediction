@@ -27,3 +27,9 @@ So instead, we do the following:
 Cool stuff!
 -   I solved the system of equations that ChatGPT provided and compared the solve answer to ChatGPT's final answer
     It's pretty promising! Major improvements across all classifiers (except maybe KMeans)
+
+ChatGPT doesn't actually understand English! 
+Instead of trying to reduce things to one letter variable names, the following prompt seems useful:
+- Change your equations to a form that can be easily parsed by Sympy. 
+By doing this, I can just split equations based on math symbols and extract variables that way.
+
